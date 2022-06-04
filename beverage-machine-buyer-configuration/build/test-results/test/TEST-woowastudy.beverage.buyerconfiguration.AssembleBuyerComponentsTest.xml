@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="woowastudy.beverage.buyerconfiguration.AssembleBuyerComponentsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-06-04T03:29:55" hostname="taehunleeui-MacBookPro.local" time="0.047">
+  <properties/>
+  <testcase name="asdf()" classname="woowastudy.beverage.buyerconfiguration.AssembleBuyerComponentsTest" time="0.047"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

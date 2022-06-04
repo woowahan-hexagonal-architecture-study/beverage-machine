@@ -1,0 +1,5 @@
+jar.enabled = true
+
+dependencies {
+    implementation project(":beverage-machine-domain")
+}

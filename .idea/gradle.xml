@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$USER_HOME$/.sdkman/candidates/gradle/current" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/beverage-machine-admin-configuration" />
+            <option value="$PROJECT_DIR$/beverage-machine-application" />
+            <option value="$PROJECT_DIR$/beverage-machine-buyer-app" />
+            <option value="$PROJECT_DIR$/beverage-machine-buyer-configuration" />
+            <option value="$PROJECT_DIR$/beverage-machine-domain" />
+            <option value="$PROJECT_DIR$/beverage-machine-incoming-adapter" />
+            <option value="$PROJECT_DIR$/beverage-machine-incoming-port" />
+            <option value="$PROJECT_DIR$/beverage-machine-outgoing-adapter" />
+            <option value="$PROJECT_DIR$/beverage-machine-outgoing-port" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

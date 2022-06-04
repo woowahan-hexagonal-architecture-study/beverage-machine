@@ -1,0 +1,11 @@
+rootProject.name = 'beverage-machine'
+include 'beverage-machine-domain'
+include 'beverage-machine-application'
+include 'beverage-machine-incoming-port'
+include 'beverage-machine-outgoing-port'
+include 'beverage-machine-incoming-adapter'
+include 'beverage-machine-outgoing-adapter'
+include 'beverage-machine-buyer-configuration'
+include 'beverage-machine-admin-configuration'
+include 'beverage-machine-buyer-app'
+

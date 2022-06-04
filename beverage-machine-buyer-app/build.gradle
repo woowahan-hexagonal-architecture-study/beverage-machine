@@ -1,0 +1,6 @@
+jar.enabled = true
+
+dependencies {
+    implementation project(":beverage-machine-buyer-configuration")
+    implementation project(":beverage-machine-incoming-adapter")
+}
