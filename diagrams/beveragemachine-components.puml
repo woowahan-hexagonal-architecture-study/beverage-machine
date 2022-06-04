@@ -1,0 +1,41 @@
+@startuml
+package "configuration" {
+    artifact "buyer-configuration"
+    artifact "admin-configuration"
+}
+
+package "adapter" {
+    artifact "incoming-adapter"
+    artifact "outgoing-adapter"
+}
+
+package "port" {
+    artifact "incoming-port"
+    artifact "outgoing-port"
+}
+
+package "application" {
+    artifact "usecase"
+}
+
+package "domain" {
+    artifact "domain "
+}
+
+(admin-configuration) --> (incoming-adapter)
+(admin-configuration) --> (outgoing-adapter)
+(buyer-configuration) --> (incoming-adapter)
+(buyer-configuration) --> (outgoing-adapter)
+' 실은 아래와 같이 configuration은 port에 대한 의존성도 가지고 있다.
+' (admin-configuration) --> (incoming-port)
+' (admin-configuration) --> (outgoing-port)
+' (buyer-configuration) --> (incoming-port)
+' (buyer-configuration) --> (outgoing-port)
+
+(incoming-adapter) --^ (incoming-port)
+(outgoing-adapter) --^ (outgoing-port)
+
+usecase -up-> (incoming-port)
+usecase -up-> (outgoing-port)
+usecase --> (domain )
+@enduml
