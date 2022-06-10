@@ -23,13 +23,13 @@ public class BuyBeverageCommand {
 
     private void validateAmount(int amount){
         if (isNull(amount)){
-            System.out.println("[alert] 최소 수량 유효성 검증 위반");
+            System.out.println("[alert] 최소 금액 유효성 검증 위반");
         }
         else if (amount>MAX_AMOUNT){
-            System.out.println("[alert] 최대 수량 유효성 검증 위반");
+            System.out.println("[alert] 최대 금액 유효성 검증 위반");
         }
         else if (amount%10 != 0){
-            System.out.println("[alert] 단위 수량 유효성 검증 위반");
+            System.out.println("[alert] 단위 금액 유효성 검증 위반");
         }
     }
 
