@@ -7,5 +7,12 @@ public class BuyBeverageUseCase implements BuyBeverageIncomingPort {
     @Override
     public void BuyBeverage(BuyBeverageCommand command) {
         // TODO 엔티티 상태에 접근하는 등 유스케이스를 이루기 위한 객체 상호작용 이후 반환~ 추후 Return Type을 수정해주세요
+        System.out.println("BuyBeverageUseCase >> " + command.toString());
+
+        // TODO 영속성 계층으로 접근하여 엔티티 조회 및 재고 차감 로직 수행
+
+        // TODO 비즈니스 모델 검증
+
+        //TODO 구매청구서 return
     }
 }
