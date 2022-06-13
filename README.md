@@ -6,6 +6,6 @@
 
 
 \
-애플리케이션 모듈 컴포넌트 구조
+## 애플리케이션 모듈 컴포넌트 구조
 
 ![beveragemachine-components.png](diagrams/beveragemachine-components.png)
