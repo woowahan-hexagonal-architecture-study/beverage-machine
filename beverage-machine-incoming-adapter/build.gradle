@@ -1,5 +1,6 @@
 jar.enabled = true
 
 dependencies {
+    implementation project(":beverage-machine-domain")
     implementation project(":beverage-machine-incoming-port")
 }

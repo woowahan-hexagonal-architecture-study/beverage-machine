@@ -1,49 +1,77 @@
 package woowastudy.beverage.incomingport;
 
-import static java.util.Objects.isNull;
+import woowastudy.beverage.domain.entity.Beverage;
+import woowastudy.beverage.domain.entity.BeverageInventory;
+import woowastudy.beverage.domain.vo.BeverageMachineMoneyUnits;
+import woowastudy.beverage.domain.vo.Money;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BuyBeverageCommand {
-    private static final int MAX_AMOUNT = 100000;
+    private Money totalAmount = Money.ZERO;
 
-    private int amount;
+    private List<Beverage> selectedBeverages = new ArrayList<>();
 
-    private String name;
+    private BeverageInventory beverageInventory;
 
-    public BuyBeverageCommand(int amount, String name) {
-        // 입력 유효성 검증 -  각 파라미터에 대해 메소드 추출
-        System.out.println("BuyBeverageCommand >> 입력 유효성 검증 시작");
-        validateAmount(amount);
-        validateName(name);
-
-        this.amount = amount;
-        this.name = name;
-
-        System.out.println("BuyBeverageCommand >> 입력 유효성 검증 완료");
+    public BuyBeverageCommand(BeverageInventory beverageInventory) {
+        this.beverageInventory = beverageInventory;
     }
 
-    private void validateAmount(int amount){
-        if (isNull(amount)){
-            System.out.println("[alert] 최소 금액 유효성 검증 위반");
+    public void addAmount(int amount) throws IllegalArgumentException {
+        Money amountMoney = Money.of(amount);
+        if(isInvalidAmount(amountMoney)) {
+            throw new IllegalArgumentException("가능한 금액 단위가 아닙니다");
         }
-        else if (amount>MAX_AMOUNT){
-            System.out.println("[alert] 최대 금액 유효성 검증 위반");
+
+        totalAmount = totalAmount.plus(amountMoney);
+    }
+
+    public void selectBeverageId(int selectedBeverageId) {
+        if(isNotExistBeverageIdInInventory(selectedBeverageId)) {
+            throw new IllegalArgumentException("현재 존재하지 않는 음료번호입니다");
         }
-        else if (amount%10 != 0){
-            System.out.println("[alert] 단위 금액 유효성 검증 위반");
+
+        Beverage selectedBeverage = beverageInventory.getItem(selectedBeverageId);
+
+        if(isNotSufficientTotalAmount(selectedBeverage)) {
+            throw new IllegalArgumentException("금액이 부족합니다");
+        }
+
+        // TODO Beverage stock 차감 및 비즈니스 검증
+
+        totalAmount = totalAmount.minus(selectedBeverage.getPrice());
+        selectedBeverages.add(selectedBeverage);
+    }
+
+    public boolean isNotSufficientTotalAmount(Beverage selectedBeverage) {
+        return totalAmount.minus(selectedBeverage.getPrice()).isNegative();
+    }
+
+    private boolean isNotExistBeverageIdInInventory(int beverageId) {
+        return !beverageInventory.hasItem(beverageId);
+    }
+
+    private boolean isInvalidAmount(Money amountMoney) {
+        return !BeverageMachineMoneyUnits.isAvailableUnit(amountMoney);
+    }
+
+    public void validEmptyTotalAmount() {
+        if(isEmptyTotalAmount()) {
+            throw new IllegalArgumentException("금액이 입력되지 않았습니다");
         }
     }
 
-    private void validateName(String name){
-        if (name.length() <3){
-            System.out.println("[alert] 음료명 유효성 검증 위반");
-        }
+    public boolean isEmptyTotalAmount() {
+        return totalAmount.isZero();
     }
 
-    @Override
-    public String toString() {
-        return "BuyBeverageCommand{" +
-                "amount=" + amount +
-                ", name='" + name + '\'' +
-                '}';
+    public Money getTotalAmount() {
+        return totalAmount;
+    }
+
+    public BeverageInventory getBeverageInventory() {
+        return beverageInventory;
     }
 }
