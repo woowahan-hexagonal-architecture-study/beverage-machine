@@ -5,7 +5,7 @@ import woowastudy.beverage.domain.vo.Money;
 
 import java.time.LocalDateTime;
 
-public class Beverage {
+public class Beverage implements NumberIdentifiableEntity<Integer> {
 
     private int id;
 
@@ -17,18 +17,24 @@ public class Beverage {
 
     private BeverageStock stock;
 
-    public Beverage(int id, Money price, String name) {
-        this(id, price, name, LocalDateTime.now());
+    public Beverage(int id, Money price, String name, int stock) {
+        this(id, price, name, BeverageStock.of(stock));
     }
 
-    public Beverage(int id, Money price, String name, LocalDateTime registrationDate) {
+    public Beverage(int id, Money price, String name, BeverageStock stock) {
+        this(id, price, name, stock, LocalDateTime.now());
+    }
+
+    public Beverage(int id, Money price, String name, BeverageStock stock, LocalDateTime registrationDate) {
         this.id = id;
         this.price = price;
         this.name = name;
+        this.stock = stock;
         this.registrationDate = registrationDate;
     }
 
-    public int getId() {
+    @Override
+    public Integer getId() {
         return id;
     }
 
@@ -38,6 +44,14 @@ public class Beverage {
 
     public String getName() {
         return name;
+    }
+
+    public BeverageStock getStock() {
+        return stock;
+    }
+
+    public void releaseStock(int quantity) {
+        stock.release(quantity);
     }
 
     @Override

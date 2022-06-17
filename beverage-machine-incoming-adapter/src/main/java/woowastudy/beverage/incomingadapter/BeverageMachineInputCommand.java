@@ -1,9 +1,9 @@
 package woowastudy.beverage.incomingadapter;
 
-import woowastudy.beverage.domain.entity.Beverage;
-import woowastudy.beverage.domain.entity.BeverageInventory;
 import woowastudy.beverage.domain.vo.BeverageMachineMoneyUnits;
 import woowastudy.beverage.domain.vo.Money;
+import woowastudy.beverage.incomingport.BeverageInventory;
+import woowastudy.beverage.incomingport.BeverageInventoryItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,10 +41,8 @@ public class BeverageMachineInputCommand {
         return inventory.getItems().stream().map(BeverageMachineInputCommand::createDisplayableBeverageText).collect(Collectors.joining(DISPLAY_BEVERAGE_DELIMITER));
     }
 
-    private static String createDisplayableBeverageText(Beverage beverage) {
-        int stock = 0; // TODO 실제 엔티티의 값을 참조하도록 변경
-
-        return String.format("%d] %s(%d, %d)", beverage.getId(), beverage.getName(), beverage.getPrice().get(), stock);
+    private static String createDisplayableBeverageText(BeverageInventoryItem item) {
+        return String.format("%d] %s(%d, %d)", item.getId(), item.getName(), item.getPrice().get(), item.getStock().get());
     }
 
     private static String createAvailableUnitsGuideText() {

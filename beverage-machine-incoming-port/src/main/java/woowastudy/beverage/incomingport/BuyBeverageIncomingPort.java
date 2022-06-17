@@ -1,5 +1,7 @@
 package woowastudy.beverage.incomingport;
 
+import woowastudy.beverage.domain.entity.BeverageBill;
+
 public interface BuyBeverageIncomingPort {
-    void buyBeverage(BuyBeverageCommand command);
+    BeverageBill buyBeverage(BuyBeverageCommand command);
 }

@@ -14,8 +14,8 @@ class BeverageTest {
     @ValueSource(ints = {1, 100, 1000, 10000, 9999})
     void equalsAndHashCode(int id) {
         // given, when
-        Beverage beverage = new Beverage(id, Money.ZERO, "");
-        Beverage beverage2 = new Beverage(id, Money.ZERO, "");
+        Beverage beverage = new Beverage(id, Money.ZERO, "", 0);
+        Beverage beverage2 = new Beverage(id, Money.ZERO, "", 0);
 
         // then
         assertThat(beverage.equals(beverage2)).isTrue();

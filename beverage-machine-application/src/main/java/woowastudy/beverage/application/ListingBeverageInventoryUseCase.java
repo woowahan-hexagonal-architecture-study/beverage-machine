@@ -1,7 +1,7 @@
 package woowastudy.beverage.application;
 
 import woowastudy.beverage.domain.entity.Beverage;
-import woowastudy.beverage.domain.entity.BeverageInventory;
+import woowastudy.beverage.incomingport.BeverageInventory;
 import woowastudy.beverage.incomingport.ListingBeverageInventoryIncomingPort;
 import woowastudy.beverage.outgoingport.BeverageRepository;
 

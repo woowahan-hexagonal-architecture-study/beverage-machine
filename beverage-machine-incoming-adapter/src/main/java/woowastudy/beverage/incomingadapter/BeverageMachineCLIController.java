@@ -1,5 +1,6 @@
 package woowastudy.beverage.incomingadapter;
 
+import woowastudy.beverage.domain.entity.BeverageBill;
 import woowastudy.beverage.incomingport.BuyBeverageCommand;
 import woowastudy.beverage.incomingport.BuyBeverageIncomingPort;
 import woowastudy.beverage.incomingport.ListingBeverageInventoryIncomingPort;
@@ -24,16 +25,9 @@ public class BeverageMachineCLIController {
         enterPrices();
         selectBeverage();
 
-//        System.out.println("2. 원하는 음료를 골라주세요"); // TODO 음료id로 고를지 이름으로 고를지..
-//        String name = SCANNER.next();
-//
-//        System.out.println("3. 고른 음료의 재고를 확인해주세요"); // TODO 영속화된 재고 수량 return
-//        // int stock = SCANNER.nextInt();
-//
-//        System.out.println("-------------주문서------------");
-//        System.out.println(amount + " "+ name );
-//
-        buyBeverageIncomingPort.buyBeverage(buyBeverageCommand);
+        BeverageBill bill = buyBeverageIncomingPort.buyBeverage(buyBeverageCommand);
+
+        displayBill(bill);
     }
 
     private void enterPrices() {
@@ -71,6 +65,10 @@ public class BeverageMachineCLIController {
         }
 
         selectBeverage();
+    }
+
+    private void displayBill(BeverageBill bill) {
+        System.out.println(BeverageBillText.text(bill));
     }
 
     private boolean isExitedBeverageSelection(int beverageIdInput) {
