@@ -1,5 +1,6 @@
 package woowastudy.beverage.domain.entity;
 
+import woowastudy.beverage.domain.vo.BeverageStock;
 import woowastudy.beverage.domain.vo.Money;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class Beverage {
 
     private LocalDateTime registrationDate; // TODO 필요한 필드인지 고민
 
-//    private int stock; // TODO Stock 엔티티 객체로 포장 이후 객체 관계 형성
+    private BeverageStock stock;
 
     public Beverage(int id, Money price, String name) {
         this(id, price, name, LocalDateTime.now());
