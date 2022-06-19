@@ -1,21 +1,85 @@
 package woowastudy.beverage.incomingadapter;
 
+import woowastudy.beverage.domain.entity.BeverageBill;
 import woowastudy.beverage.incomingport.BuyBeverageCommand;
 import woowastudy.beverage.incomingport.BuyBeverageIncomingPort;
+import woowastudy.beverage.incomingport.ListingBeverageInventoryIncomingPort;
 
 import java.util.Scanner;
 
 public class BeverageMachineCLIController {
     private final BuyBeverageIncomingPort buyBeverageIncomingPort;
+    private final ListingBeverageInventoryIncomingPort listingBeverageInventoryIncomingPort;
+
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public BeverageMachineCLIController(BuyBeverageIncomingPort buyBeverageIncomingPort) {
+    private final BuyBeverageCommand buyBeverageCommand;
+
+    public BeverageMachineCLIController(BuyBeverageIncomingPort buyBeverageIncomingPort, ListingBeverageInventoryIncomingPort listingBeverageInventoryIncomingPort) {
         this.buyBeverageIncomingPort = buyBeverageIncomingPort;
+        this.listingBeverageInventoryIncomingPort = listingBeverageInventoryIncomingPort;
+        this.buyBeverageCommand = new BuyBeverageCommand(listingBeverageInventoryIncomingPort.getBeverageInventory());
     }
 
     public void startBuying() {
-        // TODO 입출력 예시에 맞게 입출력을 구현
+        enterPrices();
+        selectBeverage();
 
-        buyBeverageIncomingPort.BuyBeverage(new BuyBeverageCommand()); // TODO 입출력 모델을 커맨드로 변환해서 넘겨주세요~
+        BeverageBill bill = buyBeverageIncomingPort.buyBeverage(buyBeverageCommand);
+
+        displayBill(bill);
+    }
+
+    private void enterPrices() {
+        try {
+            BeverageMachineInputCommand.displayEnterPriceCommand();
+            BeverageMachineInputCommand.displayCurrentTotalAmount(buyBeverageCommand.getTotalAmount());
+            int amountInput = SCANNER.nextInt();
+
+            if (isExitedEnterPrice(amountInput)) {
+                exitEnterPrice();
+                return;
+            }
+
+            buyBeverageCommand.addAmount(amountInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        enterPrices();
+    }
+
+    private void selectBeverage() {
+        try {
+            BeverageMachineInputCommand.displayBeverageItemSelection(buyBeverageCommand.getBeverageInventory());
+            BeverageMachineInputCommand.displayCurrentTotalAmount(buyBeverageCommand.getTotalAmount());
+            int beverageIdInput = SCANNER.nextInt();
+
+            if (isExitedBeverageSelection(beverageIdInput)) {
+                return;
+            }
+
+            buyBeverageCommand.selectBeverageId(beverageIdInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        selectBeverage();
+    }
+
+    private void displayBill(BeverageBill bill) {
+        System.out.println(BeverageBillText.text(bill));
+    }
+
+    private boolean isExitedBeverageSelection(int beverageIdInput) {
+        return beverageIdInput == BeverageMachineInputCommand.ENTER_BEVERAGE_SELECTION_EXIT_NUMBER;
+    }
+
+    private boolean isExitedEnterPrice(int amountInput) {
+        return amountInput == BeverageMachineInputCommand.ENTER_PRICE_EXIT_NUMBER;
+    }
+
+    private void exitEnterPrice() {
+        buyBeverageCommand.validEmptyTotalAmount();
     }
 }

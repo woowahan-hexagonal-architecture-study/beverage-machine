@@ -4,6 +4,8 @@ dependencies {
     implementation project(":beverage-machine-application")
     implementation project(":beverage-machine-incoming-adapter")
     implementation project(":beverage-machine-incoming-port")
+    implementation project(":beverage-machine-outgoing-adapter")
+    implementation project(":beverage-machine-outgoing-port")
     implementation project(":beverage-machine-domain")
 }
 
