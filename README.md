@@ -16,6 +16,8 @@ _이 스터디의 포인트는 **헥사고날 아키텍처**의 구현이기 때
 - 구매자는 음료를 구매한다
 - 관리자는 음료를 관리한다
 
+## 애플리케이션 아키텍처 (헥사고날 아키텍처)
+![beveragemachine-hexagonal-architecture.png](diagrams/beverage-machine.png)
 
 ## 애플리케이션 모듈 컴포넌트 구조
 
